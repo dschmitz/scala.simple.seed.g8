@@ -67,19 +67,25 @@ lazy val commonSettings =
       "-encoding",
       "UTF-8",
       "-feature",
+      "-Yrangepos", // semanticDB compiler plugin
       "-Ywarn-dead-code",
       "-Ywarn-numeric-widen",
       "-Ywarn-value-discard",
-      "-Ywarn-unused"
+      "-Ywarn-macros:after",
+      "-Ywarn-unused:imports",
+      "-Ywarn-unused:privates",
+      "-Ywarn-unused:locals",
+      "-Ywarn-unused:patvars",
+      "-Ywarn-unused:implicits"
     ),
     javacOptions ++= Seq(
       "-source",
       "1.8",
       "-target",
       "1.8"
-    ),
-    unmanagedSourceDirectories.in(Compile) := Seq(scalaSource.in(Compile).value),
-    unmanagedSourceDirectories.in(Test)    := Seq(scalaSource.in(Test).value)
+    )
+    //unmanagedSourceDirectories.in(Compile) := Seq(scalaSource.in(Compile).value),
+    //unmanagedSourceDirectories.in(Test)    := Seq(scalaSource.in(Test).value)
     //incOptions := incOptions.value.withNameHashing(true),
   )
 
@@ -107,14 +113,15 @@ lazy val headerSettings = Seq(
 )
 
 lazy val wartRemoverSettings = Seq(
-  wartremoverWarnings in (Compile, compile) ++= Warts.unsafe
+  Compile / compile / wartremoverErrors := Warts.unsafe,
   //  wartremoverErrors in (Compile, compile) ++= Warts.allBut(Wart.Any, Wart.StringPlusAny),
   //  wartremoverExcluded ++= (sourceManaged ** "*.scala").value.get
 )
 
 lazy val scoverageSettings = Seq(
-  coverageMinimum       := 60,
-  coverageFailOnMinimum := false
+  coverageMinimum       := 80,
+  coverageFailOnMinimum := true,
+  Test / compile / coverageEnabled := true
 )
 
 lazy val publishSettings = Seq(
