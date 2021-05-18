@@ -119,14 +119,14 @@ lazy val wartRemoverSettings = Seq(
 )
 
 lazy val scoverageSettings = Seq(
-  coverageMinimum       := 80,
-  coverageFailOnMinimum := true,
+  coverageMinimumStmtTotal         := 80,
+  coverageFailOnMinimum            := true,
   Test / compile / coverageEnabled := true
 )
 
 lazy val publishSettings = Seq(
   publishMavenStyle       := true,
-  publishArtifact in Test := false,
+  Test / publishArtifact  := false,
   publishTo := {
     val nexus = "http://127.0.0.1:48081/"
     if (isSnapshot.value) {
