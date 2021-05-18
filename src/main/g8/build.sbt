@@ -25,9 +25,9 @@ lazy val library =
 
     object Version {
       val scala          = "$scala_version$"
-      val scalaCheck     = "1.14.3"
-      val scalaTest      = "3.2.0"
-      val typesafeConfig = "1.4.0"
+      val scalaCheck     = "1.15.4"
+      val scalaTest      = "3.2.9"
+      val typesafeConfig = "1.4.1"
     }
 
     val typesafeConfig       = "com.typesafe"                 % "config"                    % Version.typesafeConfig
