@@ -1,4 +1,43 @@
 // *****************************************************************************
+// Build settings
+// *****************************************************************************
+inThisBuild(
+  Seq(
+    scalaVersion       := library.Version.scala,
+    crossScalaVersions := Seq(scalaVersion.value, library.Version.scala),
+    organization       := "$organization$",
+    name               := "$name$",
+    
+    scalacOptions ++= Seq(
+      "-unchecked",
+      "-deprecation",
+      "-language:_",
+      "-target:jvm-1.8",
+      "-encoding",
+      "UTF-8",
+      "-feature",
+      "-Yrangepos", // semanticDB compiler plugin
+      "-Ywarn-dead-code",
+      "-Ywarn-numeric-widen",
+      "-Ywarn-value-discard",
+      "-Ywarn-macros:after",
+      "-Ywarn-unused:imports",
+      "-Ywarn-unused:privates",
+      "-Ywarn-unused:locals",
+      "-Ywarn-unused:patvars",
+      "-Ywarn-unused:implicits"
+    ),
+    
+    javacOptions ++= Seq(
+      "-source",
+      "1.8",
+      "-target",
+      "1.8"
+    )
+)
+
+
+// *****************************************************************************
 // Projects
 // *****************************************************************************
 
@@ -53,37 +92,8 @@ lazy val settings =
 
 lazy val commonSettings =
   Seq(
-    scalaVersion       := library.Version.scala,
-    crossScalaVersions := Seq(scalaVersion.value, library.Version.scala),
-    organization       := "$organization$",
-    name               := "$name$",
     licenses += ("Apache 2.0", url("http://www.apache.org/licenses/LICENSE-2.0")),
     mappings.in(Compile, packageBin) += baseDirectory.in(ThisBuild).value / "LICENSE" -> "LICENSE",
-    scalacOptions ++= Seq(
-      "-unchecked",
-      "-deprecation",
-      "-language:_",
-      "-target:jvm-1.8",
-      "-encoding",
-      "UTF-8",
-      "-feature",
-      "-Yrangepos", // semanticDB compiler plugin
-      "-Ywarn-dead-code",
-      "-Ywarn-numeric-widen",
-      "-Ywarn-value-discard",
-      "-Ywarn-macros:after",
-      "-Ywarn-unused:imports",
-      "-Ywarn-unused:privates",
-      "-Ywarn-unused:locals",
-      "-Ywarn-unused:patvars",
-      "-Ywarn-unused:implicits"
-    ),
-    javacOptions ++= Seq(
-      "-source",
-      "1.8",
-      "-target",
-      "1.8"
-    )
     //unmanagedSourceDirectories.in(Compile) := Seq(scalaSource.in(Compile).value),
     //unmanagedSourceDirectories.in(Test)    := Seq(scalaSource.in(Test).value)
     //incOptions := incOptions.value.withNameHashing(true),
