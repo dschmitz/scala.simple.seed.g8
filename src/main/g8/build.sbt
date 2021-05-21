@@ -34,6 +34,7 @@ inThisBuild(
       "-target",
       "1.8"
     )
+  )
 )
 
 
